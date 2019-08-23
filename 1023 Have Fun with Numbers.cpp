@@ -1,21 +1,30 @@
-#include<bits/stdc++.h>
-
+#include <cstdio>
+#include <string.h>
 using namespace std;
-
 int book[10];
-char s[25];
-int main(){
-	cin >> s;
-	string res = "";
-	int len = strlen(s);
-	for(int i = 0; i < len; ++i){
-		int x = s[i] - '0';
-		book[x]++;
-		int xx = x*2%10;
-		book[xx]--;
-		s[i] = xx+'0';
-	}
-	int 
-	
-	return 0;
-} 
+int main() {
+    char num[22];
+    scanf("%s", num);
+    int flag = 0, len = strlen(num);
+    for(int i = len - 1; i >= 0; i--) {
+        int temp = num[i] - '0';
+        book[temp]++;
+        temp = temp * 2 + flag;
+        flag = 0;
+        if(temp >= 10) {
+            temp = temp - 10;
+            flag = 1;
+        }
+        num[i] = (temp + '0');
+        book[temp]--;
+    }
+    int flag1 = 0;
+    for(int i = 0; i < 10; i++) {
+        if(book[i] != 0)
+            flag1 = 1;
+    }
+    printf("%s", (flag1 == 1) ? "No\n" : "Yes\n");
+    if(flag == 1) printf("1");
+    printf("%s", num);
+    return 0;
+}
